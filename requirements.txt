@@ -1,6 +1,4 @@
 asyncio
-random
-string
 sqlite3
 aiogram
 pytelegramapi
