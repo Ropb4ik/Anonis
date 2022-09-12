@@ -1,4 +1,3 @@
 asyncio
 aiogram
-pyTelegramAPI
 pydoc
