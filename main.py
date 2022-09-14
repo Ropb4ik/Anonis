@@ -62,7 +62,7 @@ async def start(message : types.Message, state: FSMContext):
                                             f'<b>📋 Подробнее правила можно прочитать тут:</b>\n'
                                             f'/rules или нажать кнопку "Правила📖"\n\n'
                                             f'<b>🔎 Работает бот очень просто:</b> вы жмете кнопку поиска или используете команду /search и бот находит вам собеседника.'
-                                            f'<i>Удачного общения! Будьте вежливы к собеседникам.',reply_markup=mark_menu, parse_mode=types.ParseMode.HTML)
+                                            f'<i>Удачного общения! Будьте вежливы к собеседникам.</i>',reply_markup=mark_menu, parse_mode=types.ParseMode.HTML)
 
 @dp.message_handler(commands=['rules'],state='*')
 @dp.message_handler(lambda message : message.text == 'Правила📖')
@@ -144,7 +144,6 @@ async def chooce_sex(message : types.Message, state: FSMContext):
         warning_log.warning(e)
         await send_to_channel_log_exception(message,e)
 
-## Скрипт взят с https://t.me/BlackCloudSoft ##
 @dp.message_handler(content_types=ContentTypes.TEXT)
 @dp.message_handler(state=Chating.msg)
 async def chating(message : types.Message, state: FSMContext):
