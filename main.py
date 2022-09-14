@@ -84,10 +84,11 @@ async def search(message : types.Message):
             db.add_user(message.from_user.username,message.from_user.id)
 
         male = KeyboardButton('🙎‍♂️ Парня')
+        random = KeyboardButton('🙎‍♂️🙍‍♀️Рандом')
         wooman = KeyboardButton('🙍‍♀️ Девушку')
         back = KeyboardButton('🚫 Отменить поиск')
         sex_menu = ReplyKeyboardMarkup(resize_keyboard=True).add()
-        sex_menu.add(male,wooman)
+        sex_menu.add(male,random,wooman)
         sex_menu.add(back)
         
         await bot.send_sticker(chat_id=message.from_user.id,
@@ -99,7 +100,7 @@ async def search(message : types.Message):
 class Chating(StatesGroup):
 	msg = State()
 
-@dp.message_handler(lambda message: message.text == '🙎‍♂️ Парня' or message.text == '🙍‍♀️ Девушку',state='*')
+@dp.message_handler(lambda message: message.text == '🙎‍♂️ Парня' or message.text == '🙍‍♀️ Девушку' or message.text == '🙎‍♂️🙍‍♀️Рандом',state='*')
 async def chooce_sex(message : types.Message, state: FSMContext):
     ''' Выбор пола для поиска '''
     try:
@@ -111,6 +112,9 @@ async def chooce_sex(message : types.Message, state: FSMContext):
         elif message.text == '🙍‍♀️ Девушку':
             db.edit_sex(False,message.from_user.id)
             db.add_to_queue(message.from_user.id,False)
+        elif message.text == '🙎‍♂️🙍‍♀️Рандом':
+            db.edit_sex(False,message.from_user.id)
+            db.add_to_queue(message.from_user.id,True)
         else:
             db.add_to_queue(message.from_user.id,db.get_sex_user(message.from_user.id)[0])
         await message.answer('Ищем для вас человечка.. 🔍')
